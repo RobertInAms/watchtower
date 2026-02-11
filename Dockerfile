@@ -12,7 +12,7 @@ COPY compose-auto-update.sh /app/compose-auto-update.sh
 RUN chmod +x /app/compose-auto-update.sh
 
 # Cron job → log to container stdout
-RUN echo "*/1 * * * * /app/compose-auto-update.sh >> /proc/1/fd/1 2>&1" | crontab -
+RUN echo "*/10 * * * * /app/compose-auto-update.sh >> /proc/1/fd/1 2>&1" | crontab -
 
 # Signal-handling entrypoint
 COPY entrypoint.sh /entrypoint.sh
