@@ -1,13 +1,13 @@
 # Watchtower replacement
 
 After happily using containrrr/watchtower:latest for many years, it is no longer
-compatilbe with the current docer versions. Unfortunatly the project is no
+compatilbe with the current docker versions. Unfortunatly the project is no
 longer maintained so we had to look for a different solution. This proved to 
 be very complex so we implemented a poormans implentation
 
-Watchtower is very advanded and it retieves all settings from the running container
-This project solves this by mounting the docker-compose in the container and
-use those settings
+Watchtower is very advanded and it retrieves all settings from the running container
+This project solves this by mounting the docker-compose.yml in the container and
+use those settings by using "docker compose" insite the watchtower container
 
 # Github
 
@@ -16,10 +16,6 @@ https://github.com/RobertInAms/watchtower
 # Internals
 
 The docker-compose.yml is mounted in /app
-The cronjob run the script
-If an image is changed
-It pull
-And uses docker compose to restart the container
 
 # Docker file sample
 
