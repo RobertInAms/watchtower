@@ -14,7 +14,11 @@ This project takes a different approach:
 
 - The `docker-compose.yml` file is mounted into the container  
 - The updater uses `docker compose` internally  
-- Containers are recreated using the original Compose configuration  
+- Because docker compose needs the docker-compose.yml to start it is mounten
+- Containers are recreated using the original Compose configuration  on the host using thoe compose project definition
+- this means, mounts do not need to be available but you have to be carefull with relative paths you use in the project definition
+- so implementation is not rock solid in all situations and required planning and understanding
+- for us it works now
 
 This ensures:
 
