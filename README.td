@@ -1,38 +1,37 @@
-# Watchtower replacement
+# Watchtower Replacement
 
-After happily using containrrr/watchtower:latest for many years, it is no longer
-compatilbe with the current docker versions. Unfortunatly the project is no
-longer maintained so we had to look for a different solution. This proved to 
-be very complex so we implemented a poormans implentation
+After happily using `containrrr/watchtower:latest` for many years, it became incompatible with current Docker versions. Unfortunately, the project is no longer maintained, so we had to find an alternative.
 
-Watchtower is very advanded and it retrieves all settings from the running container
-This project solves this by mounting the docker-compose.yml in the container and
-use those settings by using "docker compose" insite the watchtower container
+Existing replacements turned out to be complex, so we implemented a **simpler, practical solution** — a “poor man’s Watchtower”.
 
-# Github
+---
 
-https://github.com/RobertInAms/watchtower
+## How This Differs From Watchtower
 
-# Internals
+**Watchtower** is very advanced. It reads all configuration directly from the running container and recreates containers using the Docker API.
 
-The docker-compose.yml is mounted in /app
+This project takes a different approach:
 
-# docker-compose.yml Sample
+- The `docker-compose.yml` file is mounted into the container  
+- The updater uses `docker compose` internally  
+- Containers are recreated using the original Compose configuration  
 
-```
+This ensures:
 
-  nginx:
-    image: robertinams/connection:devhttp
-    ports:
-      - "80:80"
-      - "443:443"
-    depends_on:
-      - printserver
-    # command: ["tail", "-f", "/dev/null"]
+- Environment variables are preserved  
+- Volumes and networks stay intact  
+- Only updated services are recreated  
+- No need to reverse-engineer container runtime config  
 
-  watchtower:
-    image: robertinams/watchtower:latest
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ./docker-compose.yml:/app/docker-compose.yml
-```
+---
+
+## GitHub Repository
+
+👉 https://github.com/RobertInAms/watchtower
+
+---
+
+## Internals
+
+The project’s `docker-compose.yml` is mounted inside the container at:
+
