@@ -35,3 +35,42 @@ This ensures:
 
 The project’s `docker-compose.yml` is mounted inside the container at:
 
+```
+/app/docker-compose.yml
+```
+
+The updater then runs `docker compose` commands against this file to recreate services when a new image version is detected.
+
+---
+
+## Sample docker-compose.yml
+
+```yaml
+services:
+  nginx:
+    image: robertinams/connection:devhttp
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - printserver
+
+  watchtower:
+    image: robertinams/watchtower:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./docker-compose.yml:/app/docker-compose.yml
+```
+
+---
+
+## Summary
+
+This project provides a lightweight, Compose-native alternative to Watchtower:
+
+- No heavy monitoring daemon  
+- No registry API flooding  
+- No complex configuration  
+- Fully preserves Compose-based setups  
+
+It focuses on **reliability and simplicity** over feature richness.
