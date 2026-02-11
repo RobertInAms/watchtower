@@ -13,13 +13,20 @@ use those settings
 
 https://github.com/RobertInAms/watchtower
 
+# Internals
+
+The docker-compose.yml is mounted in /app
+The cronjob run the script
+If an image is changed
+It pull
+And uses docker compose to restart the container
+
 # Docker file sample
 
 ```
 
   nginx:
     image: robertinams/connection:devhttp
-    container_name: nginx
     ports:
       - "80:80"
       - "443:443"
