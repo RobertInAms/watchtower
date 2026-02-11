@@ -17,7 +17,7 @@ https://github.com/RobertInAms/watchtower
 
 The docker-compose.yml is mounted in /app
 
-# Docker file sample
+# docker-compose.yml Sample
 
 ```
 
